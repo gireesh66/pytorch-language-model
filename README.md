@@ -1,1 +1,54 @@
-# pytorch-language-model
+# Assignment 2: Neural Language Model from Scratch (PyTorch)
+
+[cite_start]This project is an implementation of a neural language model from scratch using PyTorch, as required by the assignment[cite: 1, 3]. The model is an LSTM-based (Long Short-Term Memory) recurrent neural network trained on the "Pride and Prejudice" by Jane Austen dataset.
+
+## 🎯 Objective
+[cite_start]The goal is to build, train, and evaluate a sequence model to predict text[cite: 3]. [cite_start]This includes implementing all data preprocessing, tokenization, and batching from scratch[cite: 6]. [cite_start]The final model is evaluated using **perplexity**[cite: 10].
+
+## 📚 Dataset
+* **Source:** "Pride and Prejudice" by Jane Austen.
+* **Preprocessing:** The text is split into an 80% train, 10% validation, and 10% test set.
+* **Tokenization:** A vocabulary was built from the training set. To handle the large vocabulary size, a threshold was used: words appearing 3 or more times were kept, and all other rare or unseen words were mapped to an `<unk>` (unknown) token.
+
+## 🚀 How to Run
+The entire project is contained within the `[Your-Notebook-Name.ipynb]` file.
+
+1.  [cite_start]**Environment:** This project can be run directly in Google Colab[cite: 14]. It requires the following Python libraries:
+    * `torch`
+    * `numpy`
+    * `matplotlib`
+
+2.  **Run Code:** Open the `.ipynb` file in Google Colab and run the cells in order from top to bottom.
+    * The `Pride_and_Prejudice-Jane_Austen.txt` file must be uploaded to the Colab environment before running.
+    * The code will automatically split the data, preprocess it, train the models, and save the final plots and model.
+
+## 📈 Results & Analysis
+[cite_start]The assignment required experimenting to find three models: underfit, overfit, and a best-fit model[cite: 16, 17, 18, 19].
+
+### 1. Underfitting
+* **Parameters:** Small model (`nhid=50`, `nlayers=1`), trained for few epochs (`epochs=5`).
+* **Result:** Validation Perplexity: `~460.21`
+* **Plot:**
+    ![Underfit Plot](underfit_plot.png)
+* **Analysis:** Both training and validation losses remain high, showing the model is too simple to learn the data's patterns.
+
+### 2. Overfitting
+* **Parameters:** Large model (`nhid=400`), no dropout (`dropout=0.0`), trained for many epochs (`epochs=30`).
+* **Result:** Validation Perplexity: `~1946.51`
+* **Plot:**
+    ![Overfit Plot](overfit_plot.png)
+* **Analysis:** The training loss drops, but the validation loss rises significantly. This shows the model memorized the training data and failed to generalize to new data.
+
+### 3. Best Fit Model
+* **Parameters:** Balanced model (`nhid=200`, `nlayers=2`) with regularization (`dropout=0.2`) and the `<unk>` token vocabulary.
+* **Result (Validation):** Validation Perplexity: `~105.54`
+* **Plot:**
+    ![Best Fit Plot](best_fit_plot.png)
+* **Analysis:** The validation loss (orange line) decreases and then plateaus, showing the "sweet spot" where the model learned to generalize without overfitting. Early stopping around epoch 10-15 would be ideal.
+
+---
+
+## 🏆 Final Model Performance
+The `best_model.pt` file was evaluated on the held-out, unseen test set.
+
+**Final Test Perplexity: 108.51**
