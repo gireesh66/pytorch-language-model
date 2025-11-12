@@ -1,4 +1,4 @@
-# Assignment 2: Neural Language Model from Scratch (PyTorch)
+#  Neural Language Model from Scratch (PyTorch)
 
 [cite_start]This project is an implementation of a neural language model from scratch using PyTorch, as required by the assignment[cite: 1, 3]. The model is an LSTM-based (Long Short-Term Memory) recurrent neural network trained on the "Pride and Prejudice" by Jane Austen dataset.
 
