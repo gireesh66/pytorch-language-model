@@ -1,4 +1,4 @@
-# Assignment 2: Neural Language Model from Scratch (PyTorch)
+#  Neural Language Model from Scratch (PyTorch)
 
 This project is an implementation of a neural language model from scratch using PyTorch. The model is an LSTM-based (Long Short-Term Memory) recurrent neural network trained on the "Pride and Prejudice" by Jane Austen dataset.
 
@@ -18,7 +18,7 @@ The entire project is contained within the `[Your-Notebook-Name.ipynb]` file.
     * `numpy`
     * `matplotlib`
 
-2.  **Run Code:** Open the `.ipynb` file in Google Colab and run the cells in order from top to bottom.
+2.  **Run Code:** Open the `Neural_Language_Model.ipynb` file in Google Colab and run the cells in order from top to bottom.
     * The `Pride_and_Prejudice-Jane_Austen.txt` file must be uploaded to the Colab environment before running.
     * The code will automatically split the data, preprocess it, train the models, and save the final plots and model.
 
