@@ -5,13 +5,23 @@ This project is an implementation of a neural language model from scratch using 
 ## 🎯 Objective
 The goal is to build, train, and evaluate a sequence model to predict text. This includes implementing all data preprocessing, tokenization, and batching from scratch. The final model is evaluated using **perplexity**.
 
+| Layer | Type | Parameters |
+| :--- | :--- | :--- |
+| 1 | Embedding | `vocab_size` (e.g., ~7000) -> 200 dims |
+| 2 | Dropout | `p=0.2` |
+| 3 | LSTM | 2 Layers, 200 hidden units |
+| 4 | Dropout | `p=0.2` |
+| 5 | Linear (Decoder) | 200 units -> `vocab_size` |
+| - | **Optimizer** | Adam (`lr=0.001`) |
+| - | **Loss Function** | Cross-Entropy Loss |
+
 ## 📚 Dataset
 * **Source:** "Pride and Prejudice" by Jane Austen.
 * **Preprocessing:** The text is split into an 80% train, 10% validation, and 10% test set.
 * **Tokenization:** A vocabulary was built from the training set. To handle the large vocabulary size, a threshold was used: words appearing 3 or more times were kept, and all other rare or unseen words were mapped to an `<unk>` (unknown) token.
 
 ## 🚀 How to Run
-The entire project is contained within the `[Your-Notebook-Name.ipynb]` file.
+The entire project is contained within the `Neural_Language_Model.ipynb` file.
 
 1.  **Environment:** This project can be run directly in Google Colab. It requires the following Python libraries:
     * `torch`
