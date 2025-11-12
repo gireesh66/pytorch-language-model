@@ -27,21 +27,21 @@ The assignment required experimenting to find three models: underfit, overfit, a
 
 ### 1. Underfitting
 * **Parameters:** Small model (`nhid=50`, `nlayers=1`), trained for few epochs (`epochs=5`).
-* **Result:** Validation Perplexity: `460.21`
+* **Result:** Validation Perplexity: `200.44`
 * **Plot:**
     ![Underfit Plot](underfit_plot.png)
 * **Analysis:** Both training and validation losses remain high, showing the model is too simple to learn the data's patterns.
 
 ### 2. Overfitting
 * **Parameters:** Large model (`nhid=400`), no dropout (`dropout=0.0`), trained for many epochs (`epochs=30`).
-* **Result:** Validation Perplexity: `1946.51`
+* **Result:** Validation Perplexity: `417.65`
 * **Plot:**
     ![Overfit Plot](overfit_plot.png)
 * **Analysis:** The training loss drops, but the validation loss rises significantly. This shows the model memorized the training data and failed to generalize to new data.
 
 ### 3. Best Fit Model
 * **Parameters:** Balanced model (`nhid=200`, `nlayers=2`) with regularization (`dropout=0.2`) and the `<unk>` token vocabulary.
-* **Result (Validation):** Validation Perplexity: `105.54`
+* **Result (Validation):** Validation Perplexity: `106.95`
 * **Plot:**
     ![Best Fit Plot](bestfit_plot.png)
 * **Analysis:** The validation loss (orange line) decreases and then plateaus, showing the "sweet spot" where the model learned to generalize without overfitting. Early stopping around epoch 10-15 would be ideal.
