@@ -43,7 +43,7 @@ The assignment required experimenting to find three models: underfit, overfit, a
 * **Parameters:** Balanced model (`nhid=200`, `nlayers=2`) with regularization (`dropout=0.2`) and the `<unk>` token vocabulary.
 * **Result (Validation):** Validation Perplexity: `105.54`
 * **Plot:**
-    ![Best Fit Plot](best_fit_plot.png)
+    ![Best Fit Plot](bestfit_plot.png)
 * **Analysis:** The validation loss (orange line) decreases and then plateaus, showing the "sweet spot" where the model learned to generalize without overfitting. Early stopping around epoch 10-15 would be ideal.
 
 ---
