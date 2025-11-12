@@ -5,6 +5,8 @@ This project is an implementation of a neural language model from scratch using 
 ## 🎯 Objective
 The goal is to build, train, and evaluate a sequence model to predict text. This includes implementing all data preprocessing, tokenization, and batching from scratch. The final model is evaluated using **perplexity**.
 
+## 🏗️ Model Architecture (Best Fit)
+The final model is an LSTM network with the following architecture:
 | Layer | Type | Parameters |
 | :--- | :--- | :--- |
 | 1 | Embedding | `vocab_size` (e.g., ~7000) -> 200 dims |
