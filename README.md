@@ -63,4 +63,4 @@ The assignment required experimenting to find three models: underfit, overfit, a
 ## 🏆 Final Model Performance
 The `best_model.pt` file was evaluated on the held-out, unseen test set.
 
-**Final Test Perplexity: 108.51**
+**Final Test Perplexity: 107.88**
