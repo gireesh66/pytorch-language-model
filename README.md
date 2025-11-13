@@ -63,14 +63,14 @@ The assignment required experimenting to find three models: underfit, overfit, a
 * **Parameters:** Small model (`nhid=50`, `nlayers=1`), trained for few epochs (`epochs=5`).
 * **Result:** Validation Perplexity: **~221.4** (from loss of 5.4)
 * **Plot:**
-    ![Underfit Plot](underfitplot.png)
+    ![Underfit Plot](underfit_plot.png)
 * **Analysis:** Both training and validation losses remain very high and plateau immediately. This shows the model is too simple and has not been trained long enough to learn the data's patterns.
 
 ### 2. 📈 Overfitting
 * **Parameters:** Large model (`nhid=400`), no dropout (`dropout=0.0`), trained for many epochs (`epochs=30`).
 * **Result:** Final Validation Perplexity: **316.53**
 * **Plot:**
-    ![Overfit Plot](overfitplot.png)
+    ![Overfit Plot](overfit_plot.png)
 * **Analysis:** The plot shows a classic divergence: the training loss (blue) continues to decrease while the validation loss (orange) *rises* after epoch 5. This proves the model is memorizing the training data and failing to generalize.
 
 
