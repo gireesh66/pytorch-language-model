@@ -14,26 +14,26 @@ The goal is to build, train, and evaluate a sequence model to predict text. This
 ---
 
 ## 🏆 Final Model Performance
-The `best_model.pt` file was evaluated on the held-out, unseen test set. It achieved a perplexity score that was extremely close to its validation score, proving it generalizes well.
-
+The `best_model.pt` (the Bidirectional LSTM) was evaluated on the held-out, unseen test set.
 > **Final Test Perplexity: 1.57**
 
 *(A perplexity of 1.0 is perfect, so 1.57 indicates a very high-quality model.)*
 
 ---
 
-
 ## 🏗️ Model Architecture (Best Fit)
 
-The final model is an LSTM network with the following architecture, based on the "Best Fit" parameters:
+The "Best Fit" experiment was run using a **Bidirectional LSTM**. This architecture is fundamentally different from the unidirectional models, as it processes text in both forward and backward directions.
+
+This change requires the final Linear (Decoder) layer to accept an input of 400 (200 units from the forward pass + 200 units from the backward pass).
 
 | Layer | Type | Parameters |
 | :--- | :--- | :--- |
 | 1 | Embedding | `vocab_size` (~7000) -> **200 dims** (`emsize=200`) |
-| 2 | Dropout | `p=0.2` (`dropout=0.2`) |
-| 3 | LSTM | **2 Layers** (`nlayers=2`), **200 hidden units** (`nhid=200`) |
-| 4 | Dropout | `p=0.2` (`dropout=0.2`) |
-| 5 | Linear (Decoder) | **200 units** -> `vocab_size` |
+| 2 | Dropout | `p=0.2` |
+| 3 | **Bidirectional LSTM** | **2 Layers** (`nlayers=2`), **200 hidden units** (`nhid=200`) per direction |
+| 4 | Dropout | `p=0.2` |
+| 5 | Linear (Decoder) | **400 units** (`nhid * 2`) -> `vocab_size` |
 | - | **Optimizer** | Adam (`lr=0.001`) |
 | - | **Loss Function** | Cross-Entropy Loss |
 
@@ -74,9 +74,11 @@ The assignment required experimenting to find three models: underfit, overfit, a
 * **Analysis:** The plot shows a classic divergence: the training loss (blue) continues to decrease while the validation loss (orange) *rises* after epoch 5. This proves the model is memorizing the training data and failing to generalize.
 
 
-### 3. ✅ Best Fit Model
-* **Parameters:** Balanced model (`nhid=200`, `nlayers=2`) with regularization (`dropout=0.2`) and the `<unk>` token vocabulary.
-* **Result (Validation):** Validation Perplexity: **1.59**
+### 3. ✅ "Best Fit" Model (Bidirectional)
+* **Parameters:** **Bidirectional LSTM** (`nhid=200`, `nlayers=2`) with regularization (`dropout=0.2`).
+* **Result (Validation):** Perplexity **1.59**
 * **Plot:**
     ![Best Fit Plot](bestfit_plot.png)
 * **Analysis:** This plot is ideal. Both training and validation losses drop to an extremely low level and track each other closely. This shows the model has learned the data's patterns effectively without overfitting.
+
+
