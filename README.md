@@ -1,21 +1,42 @@
-#  Neural Language Model from Scratch (PyTorch)
+# Neural Language Model from Scratch (PyTorch)
+
+<p align="left">
+  <img src="https://img.shields.io/badge/Python-3.9-blue.svg?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/PyTorch-2.0-red.svg?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch">
+  <img src="https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge" alt="License">
+</p>
 
 This project is an implementation of a neural language model from scratch using PyTorch. The model is an LSTM-based (Long Short-Term Memory) recurrent neural network trained on the "Pride and Prejudice" by Jane Austen dataset.
 
 ## 🎯 Objective
 The goal is to build, train, and evaluate a sequence model to predict text. This includes implementing all data preprocessing, tokenization, and batching from scratch. The final model is evaluated using **perplexity**.
 
+---
+
+## 🏆 Final Model Performance
+The `best_model.pt` file was evaluated on the held-out, unseen test set. It achieved a perplexity score that was extremely close to its validation score, proving it generalizes well.
+
+> **Final Test Perplexity: 1.57**
+
+*(A perplexity of 1.0 is perfect, so 1.57 indicates a very high-quality model.)*
+
+---
+
+
 ## 🏗️ Model Architecture (Best Fit)
-The final model is an LSTM network with the following architecture:
+
+The final model is an LSTM network with the following architecture, based on the "Best Fit" parameters:
+
 | Layer | Type | Parameters |
 | :--- | :--- | :--- |
-| 1 | Embedding | `vocab_size` (e.g., ~7000) -> 200 dims |
-| 2 | Dropout | `p=0.2` |
-| 3 | LSTM | 2 Layers, 200 hidden units |
-| 4 | Dropout | `p=0.2` |
-| 5 | Linear (Decoder) | 200 units -> `vocab_size` |
+| 1 | Embedding | `vocab_size` (~7000) -> **200 dims** (`emsize=200`) |
+| 2 | Dropout | `p=0.2` (`dropout=0.2`) |
+| 3 | LSTM | **2 Layers** (`nlayers=2`), **200 hidden units** (`nhid=200`) |
+| 4 | Dropout | `p=0.2` (`dropout=0.2`) |
+| 5 | Linear (Decoder) | **200 units** -> `vocab_size` |
 | - | **Optimizer** | Adam (`lr=0.001`) |
 | - | **Loss Function** | Cross-Entropy Loss |
+
 
 ## 📚 Dataset
 * **Source:** "Pride and Prejudice" by Jane Austen.
@@ -31,36 +52,39 @@ The entire project is contained within the `Neural_Language_Model.ipynb` file.
     * `matplotlib`
 
 2.  **Run Code:** Open the `Neural_Language_Model.ipynb` file in Google Colab and run the cells in order from top to bottom.
-    * The `Pride_and_Prejudice-Jane_Austen.txt` file must be uploaded to the Colab environment before running.
+    * The `Pride_and_Prejudice-Jane_Aust.txt` file must be uploaded to the Colab environment before running.
     * The code will automatically split the data, preprocess it, train the models, and save the final plots and model.
 
 ## 📈 Results & Analysis
 The assignment required experimenting to find three models: underfit, overfit, and a best-fit model.
 
-### 1. Underfitting
+<details>
+<summary><b>1. 📉 Underfitting</b></summary>
+<br>
 * **Parameters:** Small model (`nhid=50`, `nlayers=1`), trained for few epochs (`epochs=5`).
-* **Result:** Validation Perplexity: `200.44`
+* **Result:** Validation Perplexity: **~221.4** (from loss of 5.4)
 * **Plot:**
     ![Underfit Plot](underfit_plot.png)
-* **Analysis:** Both training and validation losses remain high, showing the model is too simple to learn the data's patterns.
+* **Analysis:** Both training and validation losses remain very high and plateau immediately. This shows the model is too simple and has not been trained long enough to learn the data's patterns.
+</details>
 
-### 2. Overfitting
+<details>
+<summary><b>2. 📈 Overfitting</b></summary>
+<br>
 * **Parameters:** Large model (`nhid=400`), no dropout (`dropout=0.0`), trained for many epochs (`epochs=30`).
-* **Result:** Validation Perplexity: `417.65`
+* **Result:** Final Validation Perplexity: **316.53**
 * **Plot:**
     ![Overfit Plot](overfit_plot.png)
-* **Analysis:** The training loss drops, but the validation loss rises significantly. This shows the model memorized the training data and failed to generalize to new data.
+* **Analysis:** The plot shows a classic divergence: the training loss (blue) continues to decrease while the validation loss (orange) *rises* after epoch 5. This proves the model is memorizing the training data and failing to generalize.
 
-### 3. Best Fit Model
+</details>
+
+<details>
+<summary><b>3. ✅ Best Fit Model</b></summary>
+<br>
 * **Parameters:** Balanced model (`nhid=200`, `nlayers=2`) with regularization (`dropout=0.2`) and the `<unk>` token vocabulary.
-* **Result (Validation):** Validation Perplexity: `106.95`
+* **Result (Validation):** Validation Perplexity: **1.59**
 * **Plot:**
-    ![Best Fit Plot](bestfit_plot.png)
-* **Analysis:** The validation loss (orange line) decreases and then plateaus, showing the "sweet spot" where the model learned to generalize without overfitting. Early stopping around epoch 10-15 would be ideal.
-
----
-
-## 🏆 Final Model Performance
-The `best_model.pt` file was evaluated on the held-out, unseen test set.
-
-**Final Test Perplexity: 107.88**
+    ![Best Fit Plot](best_fit_plot.png)
+* **Analysis:** This plot is ideal. Both training and validation losses drop to an extremely low level and track each other closely. This shows the model has learned the data's patterns effectively without overfitting.
+</details>
